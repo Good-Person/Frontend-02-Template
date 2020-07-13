@@ -81,20 +81,96 @@
 
   - Sign 占用1位 表示正负**0**表示正数**1**表示负数
   - Exponent 占用11位 有一个基准值 01111111111 （1023） 
-  - Fraction 占用52位 表示精度有一个 开头是1
+  - Fraction 占用52位 表示精度 开头是1
 
-  > 双精度浮点类型，基本思想就是把一个数字拆成两部分，一部分是指数位数，一部分是有效位数，指数位数表示数字的范围（2的整次幂），有效位数表示精度（除以2后的余数）例如6 = 2**2 * 1.5
+  > 双精度浮点类型，基本思想就是把一个数字拆成两部分，一部分是指数位数，一部分是有效位数，指数位数表示数字的范围（2的整次幂），有效位数表示精度（除以2的整次幂后的余数）
+  >
+  > 例如 6 = 2**2 * 1.5
   >
   > 所以用IEEE 754 双精度浮点数 表示6 （0 10000000001 1100000000000000000000000000000000000000000000000000）
+  >
+  > sign 0 表示正
+  >
+  > Exponent (10000000001)<sub>2</sub> - (01111111111)<sub>2</sub> = (10)<sub>2</sub> = (2)<sub>10</sub> 
+  >
+  > Fraction (1.1)<sub>2</sub> = (1.5)<sub>10</sub> 
 
 #####String
 
+- Character 字符
+
+- Code Point 字符对应的编码数字
+
+- Encoding 编码格式
+
+  - ASCII
+  - Unicode
+  - GB
+    - GB2312
+    - GBK（GB13000）
+    - GB18030
+  - ISO-8859
+  - BIG5
+
+  > Unicode 范围广 所有有很多编码格式
+  >
+  > UTF8    01100001——a  01100010——b
+  >
+  > UTF16  00000000 0110001——a  00000000 01100010——b
+  >
+  > 中文UTF8 加入控制位才能表示
+  >
+  > UTF8  **1110**0100 **10**111000 **10**000000 —— ‘一’
+
 #####Boolean
+
+- true
+- false
 
 #####Object
 
+​	在设计对象的状态和行为时，我们总是遵循“行为改变状态”的原则
+
+```js
+class Human{
+  constructor(name){
+    this.name = name;
+    this.health = 100;
+  }
+  hurt(damage) {
+    let {msg, health} = damage;
+    this.health -= health;
+    console.log(`${msg} ${this.name} current health is ${this.health}`)
+  }
+}
+class Dog{
+  constructor(name) {
+    this.name = `Dog ${name}`;
+    this.attack = 'bite';
+  }
+  attackPower(){
+    return ~~(Math.random()*100)
+  }
+}
+let tom = new Human('tom');
+let teddy = new Dog('teddy');
+tom.hurt({
+  msg: `${teddy.name} ${teddy.attack} ${tom.name}.`,
+  health: teddy.attackPower()
+})
+// Dog teddy bite tom. tom current health is 48
+```
+
+
+
+#####Symbol
+
+​	作为Object 的 key 使用，相较于字符串有一定的保护性
+
 #####Null
+
+​	Null表示有值，但是为空
 
 #####Undefined
 
-#####Symbol
+​	Undefined 表示未定义  老的js版本可以赋值所以推荐使用void 0;
