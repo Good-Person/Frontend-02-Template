@@ -14,3 +14,5 @@ http.createServer((req, res) => {
         res.end(" Hello world\n")
     })
 }).listen(8088)
+
+console.log('启动成功')
