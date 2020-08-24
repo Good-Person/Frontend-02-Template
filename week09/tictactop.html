@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tictactop</title>
+    <style>
+        .cell {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            width: 60px;
+            font-size: 40px;
+            background-color: lightseagreen;
+            border: 2px solid #fff;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+<script>
+    var pattern = [
+        0, 2, 0,
+        0, 1, 0,
+        0, 0, 0
+    ]
+
+    function show() {
+        let board = document.getElementById("content");
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.innerHTML = 
+                    pattern[i*3 + j] == 2 ? "❌" :
+                    pattern[i*3 + j] == 1 ? "⭕️" : "";
+
+                board.appendChild(cell);
+            }
+            board.appendChild(document.createElement("br"))
+        }
+    }
+
+    show();
+
+</script>
+</html>

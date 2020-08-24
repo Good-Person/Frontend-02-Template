@@ -9,7 +9,7 @@ http.createServer((req, res) => {
         console.log('body', body)
     }).on('end', () => {
         // body = Buffer.concat(body).toString();
-        // console.log(body)
+        console.log(body)
         res.writeHead(200, {"Content-Type": "text/html"})
         res.end(" Hello world\n")
     })

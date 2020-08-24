@@ -50,9 +50,8 @@ class Request{
                 }
             })
 
-            connection.on("end", (e) => {
+            connection.on("end", () => {
                 console.log("断开链接")
-                resolve(e)
             })
 
             connection.on("error", (err) => {
@@ -66,7 +65,7 @@ class Request{
 class ResponseParser{
     constructor() {
         this.isFinshed = false;
-        this.response = null;
+        this.response = null
     }
 
     receive(string) {
@@ -84,7 +83,8 @@ void async function() {
             ["X-Foo2"]: "customed"
         },
         body: {
-            name: "huige"
+            name: "huige",
+            name2: "winter"
         }
     })
 
