@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trafficLight</title>
+    <style>
+        .traffic {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            background-color: lightslategrey;
+            margin: 0 20px;
+        }
+        .red.light {
+            background-color: red;
+        }
+        .yellow.light {
+            background-color: yellow;
+        }
+        .green.light {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="traffic green"></div>
+        <div class="traffic yellow"></div>
+        <div class="traffic red"></div>
+    </div>
+</body>
+
+<script>
+    let dom = document.getElementsByClassName("traffic");
+    
+    function sleep(t) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, t)
+        })
+    }
+
+    function reset() {
+        for (let i = 0; i < 3; i++) {
+            dom[i].classList.remove("light")
+        }
+    }
+
+    function green() {
+        reset();
+        dom[0].classList.add("light")
+    }
+
+    function yellow() {
+        reset();
+        dom[1].classList.add("light")
+    }
+
+    function red() {
+        reset();
+        dom[2].classList.add("light")
+    }
+
+    function go() {
+        green();
+        sleep(1000).then(() => {
+            yellow();
+            return sleep(200);
+        }).then(() => {
+            red();
+            return sleep(500);
+        }).then(() => {
+            go()
+        })
+    }
+</script>
+</html>
