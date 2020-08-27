@@ -35,7 +35,9 @@
     let dom = document.getElementsByClassName("traffic");
     
     function sleep(t) {
+        console.log("start sleep")
         return new Promise((resolve) => {
+            console.log("sleep promise")
             setTimeout(resolve, t)
         })
     }
@@ -68,10 +70,27 @@
             return sleep(200);
         }).then(() => {
             red();
+            return Promise.reject()
             return sleep(500);
         }).then(() => {
             go()
+        }).catch(err => {
+            console.log('error', err)
         })
+    }
+
+    async function go2() {
+        while(true) {
+            green();
+            console.log("before sleep1")
+            await sleep(1000);
+            yellow();
+            console.log("before sleep2")
+            await sleep(200);
+            red();
+            console.log("before sleep3")
+            await sleep(500);
+        }
     }
 </script>
 </html>
